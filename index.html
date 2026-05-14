@@ -1,239 +1,838 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynasty League Constitution</title>
     <style>
-        :root {
-            --primary: #1a1a2e;
-            --secondary: #16213e;
-            --accent: #4ecca3;
-            --text: #e9ecef;
-            --highlight: #0f3460;
-        }
+      /* 1. DEFAULT THEME (Original Dark) */
+      :root {
+        --primary-bg: #1a1a2e;
+        --sidebar-bg: #16213e;
+        --card-bg: #0f3460;
+        --accent: #4ecca3;
+        --text-nav: #e9ecef;
+        --text-main: #e9ecef;
+        --text-header: #4ecca3;
+        --card-h2: #4ecca3;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: var(--primary);
-            margin: 0;
-            display: flex;
-        }
+      /* 2. COLTS THEME */
+      .theme-colts {
+        --primary-bg: #f8f9fa;
+        --sidebar-bg: #002c5f;
+        --card-bg: #ffffff;
+        --accent: #002c5f;
+        --text-nav: #ffffff;
+        --text-main: #002c5f;
+        --text-header: #002c5f;
+        --card-h2: #002c5f;
+      }
 
-        /* Sidebar Navigation */
-        nav {
-            width: 250px;
-            height: 100vh;
-            background: var(--secondary);
-            position: fixed;
-            padding: 20px;
-            border-right: 1px solid var(--highlight);
-            overflow-y: auto;
-        }
+      /* 3. PACERS THEME - FIXED CONTRAST */
+      .theme-pacers {
+        --primary-bg: #002d62;
+        --sidebar-bg: #002550;
+        --card-bg: #fdb927;
+        --accent: #fdb927;
+        --text-nav: #fdb927;
+        --text-main: #002d62;
+        --text-header: #fdb927; /* Page Header is Gold on Blue bg */
+        --card-h2: #002d62; /* Card Title is Blue on Gold card */
+      }
 
-        nav h2 { color: var(--accent); font-size: 1.2rem; }
+      /* 4. IU THEME */
+      .theme-iu {
+        --primary-bg: #fdfcf5;
+        --sidebar-bg: #990000;
+        --card-bg: #ffffff;
+        --accent: #990000;
+        --text-nav: #fdfcf5;
+        --text-main: #333333;
+        --text-header: #990000;
+        --card-h2: #990000;
+      }
 
-        nav a {
-            display: block;
-            color: var(--text);
-            text-decoration: none;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--highlight);
-            font-size: 0.9rem;
-        }
+      body {
+        font-family: "Segoe UI", system-ui, sans-serif;
+        line-height: 1.6;
+        color: var(--text-main);
+        background-color: var(--primary-bg);
+        margin: 0;
+        display: flex;
+        transition: all 0.3s ease;
+        scroll-behavior: smooth;
+      }
 
-        nav a:hover { color: var(--accent); }
+      nav {
+        width: 280px;
+        height: 100vh;
+        background: var(--sidebar-bg);
+        position: fixed;
+        padding: 25px;
+        box-sizing: border-box;
+        border-right: 3px solid var(--accent);
+        z-index: 100;
+        overflow-y: auto;
+      }
 
-        /* Main Content */
-        main {
-            margin-left: 290px;
-            padding: 40px;
-            max-width: 900px;
-        }
+      .theme-label {
+        color: var(--text-nav);
+        font-size: 0.75rem;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
 
-        header {
-            border-bottom: 2px solid var(--accent);
-            margin-bottom: 40px;
-        }
+      .theme-select {
+        width: 100%;
+        padding: 10px 15px;
+        margin-bottom: 40px;
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        border: 1px solid var(--accent);
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 15px top 50%;
+        background-size: 10px auto;
+      }
 
-        h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        h2 { color: var(--accent); margin-top: 40px; border-left: 4px solid var(--accent); padding-left: 15px; }
-        h3 { color: #fff; margin-top: 25px; }
+      .theme-select option {
+        background: #333;
+        color: #fff;
+      }
 
-        .card {
-            background: var(--secondary);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
+      nav a {
+        text-decoration: none;
+        display: block;
+        padding: 12px 0;
+        color: var(--text-nav);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.95rem;
+        transition: 0.2s;
+      }
+      nav a:hover {
+        color: var(--accent);
+        padding-left: 5px;
+      }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
+      main {
+        margin-left: 280px;
+        padding: 60px;
+        max-width: 900px;
+        width: 100%;
+        box-sizing: border-box;
+      }
 
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid var(--highlight);
-        }
+      header h1 {
+        font-size: 3.5rem;
+        color: var(--text-header);
+        margin: 0;
+        text-transform: uppercase;
+      }
+      header p {
+        color: var(--text-header);
+        opacity: 0.8;
+        font-weight: bold;
+        margin-bottom: 50px;
+        font-size: 1.2rem;
+      }
 
-        th { background-color: var(--highlight); color: var(--accent); }
+      .card {
+        background: var(--card-bg);
+        padding: 40px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-top: 8px solid var(--accent);
+      }
 
-        .badge {
-            background: var(--accent);
-            color: var(--primary);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
+      h2 {
+        color: var(--card-h2);
+        margin-top: 0;
+        font-size: 2rem;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+        padding-bottom: 10px;
+      }
 
-        footer { margin-top: 60px; font-size: 0.8rem; color: #666; text-align: center; }
+      .example-box {
+        background: rgba(0, 0, 0, 0.05);
+        border-left: 5px solid var(--accent);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 0 4px 4px 0;
+        font-style: italic;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        color: inherit;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 15px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+      }
+      th {
+        color: var(--accent);
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+      }
+
+      ul li {
+        margin-bottom: 10px;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body id="main-body">
     <nav>
-        <h2>Constitution</h2>
-        <a href="#financials">I. Financials & Dues</a>
-        <a href="#payouts">II. Payouts & Awards</a>
-        <a href="#rosters">III. Roster Settings</a>
-        <a href="#scoring">IV. Scoring System</a>
-        <a href="#drafting">V. Drafting & Taxi</a>
-        <a href="#order">VI. Draft Order & Tiebreakers</a>
-        <a href="#trades">VII. Trades & Transfers</a>
-        <a href="#waivers">VIII. Waivers & Free Agency</a>
+      <label class="theme-label">Theme Picker</label>
+      <select
+        class="theme-select"
+        onchange="document.getElementById('main-body').className = this.value"
+      >
+        <option value="">Modern Dark</option>
+        <option value="theme-colts">Indianapolis Colts</option>
+        <option value="theme-pacers">Indiana Pacers</option>
+        <option value="theme-iu">Indiana Hoosiers</option>
+      </select>
+
+      <label class="theme-label" style="opacity: 0.6; margin-bottom: 5px"
+        >League Roadmap</label
+      >
+      <a href="#manifesto">The Manifesto</a>
+      <a href="#sec1">I. Financials & Payouts</a>
+      <a href="#sec2">II. Roster & Scoring</a>
+      <a href="#sec3">III. Weekly Logistics</a>
+      <a href="#sec4">IV. The Tournament</a>
+      <a href="#sec5">V. The Drafts</a>
+      <a href="#sec6">VI. League Integrity</a>
     </nav>
 
     <main>
-        <header>
-            <h1>Dynasty League Constitution</h1>
-            <p>Draft Version 1.1 | Established May 2026</p>
-        </header>
+      <header>
+        <h1>Constitution</h1>
+        <p>10-Team Superflex Dynasty | Established 2026</p>
+      </header>
 
-        <section id="financials">
-            <h2>I. Financials & Dues</h2>
-            <div class="card">
-                <p>To ensure long-term league stability, the following financial rules apply:</p>
-                <ul>
-                    <li><strong>Platform:</strong> All funds are held via <strong>LeagueSafe</strong> with Majority Approval.</li>
-                    <li><strong>The 2-Year Rule:</strong> All managers must be paid one year in advance. Initial buy-in covers 2026 and 2027.</li>
-                    <li><strong>Future Pick Tax:</strong> If a manager trades a draft pick for a year not yet paid for, they must immediately pay the dues for that year.</li>
-                </ul>
-            </div>
-        </section>
+      <section id="manifesto">
+        <div
+          class="card"
+          style="border-top: none; background: rgba(255, 255, 255, 0.05)"
+        >
+          <p
+            style="
+              font-size: 1.25rem;
+              line-height: 1.5;
+              font-style: italic;
+              color: var(--text-header);
+            "
+          >
+            "This isn't a casual home league; this is a multi-year chess match.
+            <br /><br />
+            Welcome to the <strong>[League Name]</strong>. We built this league
+            because we got tired of casuals who stop setting their lineups in
+            November. We are here to build legacies, not just lineups.
+            <br /><br />
+            In this room, we reward the grinders, the trade-machine junkies, and
+            the managers who know their third-string Tight End’s target share.
+            We’ve designed this constitution to be as precise as a 40-yard dime.
+            We’re here to talk trash, take names, and occasionally take each
+            other's money. <br /><br />
+            Play hard, trade often, and remember:
+            <strong>Second place is just the first person to lose.</strong>"
+          </p>
+        </div>
+      </section>
 
-        <section id="payouts">
-            <h2>II. Payouts & Awards</h2>
-            <div class="card">
-                <p>Based on a $50/year entry ($500 Total Pot):</p>
-                <table>
-                    <tr><th>Award</th><th>Amount</th><th>Description</th></tr>
-                    <tr><td>1st Place</td><td>$250</td><td>League Champion</td></tr>
-                    <tr><td>2nd Place</td><td>$100</td><td>Runner-Up</td></tr>
-                    <tr><td>Regular Season Points Champ</td><td>$75</td><td>Most Total Points For (Weeks 1-14)</td></tr>
-                    <tr><td>The Weekly Grind</td><td>$75</td><td>Split among managers with the highest score each week ($5.35/week)</td></tr>
-                </table>
-            </div>
-        </section>
+      <section id="sec1">
+        <div class="card">
+          <h2>I. Financials, Stability & Payouts</h2>
 
-        <section id="rosters">
-            <h2>III. Roster Settings</h2>
-            <div class="card">
-                <table>
-                    <tr><th>Position</th><th>Count</th></tr>
-                    <tr><td>Quarterback</td><td>1</td></tr>
-                    <tr><td>Running Back</td><td>2</td></tr>
-                    <tr><td>Wide Receiver</td><td>2</td></tr>
-                    <tr><td>Tight End</td><td>1</td></tr>
-                    <tr><td>Flex (RB/WR/TE)</td><td>3</td></tr>
-                    <tr><td>Superflex (QB/RB/WR/TE)</td><td>1</td></tr>
-                    <tr style="color: var(--accent);"><td><strong>Total Starters</strong></td><td><strong>10</strong></td></tr>
-                    <tr><td>Bench</td><td>16</td></tr>
-                    <tr><td>Taxi Squad</td><td>4</td></tr>
-                    <tr><td>Injured Reserve (IR)</td><td>2</td></tr>
-                </table>
-            </div>
-        </section>
+          <h3>1.1 Membership & Dues</h3>
+          <ul>
+            <li><strong>League Size:</strong> 10 Teams.</li>
+            <li>
+              <strong>Annual Dues:</strong> $100 per season via
+              <strong>LeagueSafe</strong>.
+            </li>
+            <li>
+              <strong>The 2-Year Rule (Stability):</strong> All managers must be
+              paid one year in advance. Initial buy-in is
+              <strong>$200</strong> (covers 2026 and 2027).
+            </li>
+            <li>
+              <strong>Co-Owner Rules:</strong> Teams may have co-owners. The
+              "Primary Manager" is the sole point of contact for dues and
+              voting.
+            </li>
+          </ul>
 
-        <section id="scoring">
-            <h2>IV. Scoring System</h2>
-            <div class="card">
-                <h3>Passing</h3>
-                <ul>
-                    <li>Passing TD: <span class="badge">5 Points</span></li>
-                    <li>Passing Yards: 1 pt per 25 yards</li>
-                    <li>Interception: <span class="badge">-3 Points</span></li>
-                </ul>
-                <h3>Rushing & Receiving</h3>
-                <ul>
-                    <li>Reception (All): 0.5 PPR</li>
-                    <li><strong>TE Premium:</strong> Additional +0.5 per reception (Total 1.0)</li>
-                    <li><strong>First Downs:</strong> +0.5 per Rushing/Receiving 1st Down</li>
-                    <li>Fumbles Lost: -2 Points</li>
-                </ul>
-            </div>
-        </section>
+          <h3>1.2 The Continuity Pick Tax</h3>
+          <p>
+            To trade a future draft pick, your dues must be paid up to and
+            including the year of that pick. You cannot "skip" years of payment.
+          </p>
+          <div class="example-box">
+            <strong>Example:</strong> In the 2026 season, you are already paid
+            through 2027. If you trade your <strong>2029 1st</strong>, you must
+            immediately pay for both <strong>2028 and 2029</strong> ($200
+            total). This ensures a continuous chain of funding for the league's
+            future.
+          </div>
 
-        <section id="drafting">
-            <h2>V. Drafting & Taxi</h2>
-            <div class="card">
-                <h3>Startup Draft</h3>
-                <p><strong>Slow Draft</strong> (8-hour clock) including Vets and Rookies. 4-round Rookie Drafts will occur annually in subsequent years.</p>
-                
-                <h3>Taxi Squad Rules</h3>
-                <ul>
-                    <li><strong>Duration:</strong> 3 Years (Sleeper Setting: 2 Years Experience).</li>
-                    <li><strong>Deadline:</strong> Week 1 of the Regular Season.</li>
-                    <li><strong>Movement:</strong> Promotion is a one-way street.</li>
-                </ul>
-            </div>
-        </section>
+          <h3>1.3 Payout Structure ($1,000 Total)</h3>
+          <table>
+            <tr>
+              <th>Award</th>
+              <th>Amount</th>
+              <th>Criteria</th>
+            </tr>
+            <tr>
+              <td><strong>1st Place</strong></td>
+              <td>$500</td>
+              <td>League Champion</td>
+            </tr>
+            <tr>
+              <td><strong>2nd Place</strong></td>
+              <td>$200</td>
+              <td>Runner-Up</td>
+            </tr>
+            <tr>
+              <td><strong>Points Champ</strong></td>
+              <td>$100</td>
+              <td>Most Total Points (Weeks 1-14)</td>
+            </tr>
+            <tr>
+              <td><strong>Weekly Winners</strong></td>
+              <td>$130</td>
+              <td>$10 to the highest scorer each week (Weeks 1-13)</td>
+            </tr>
+            <tr>
+              <td><strong>MASH Unit</strong></td>
+              <td>$20</td>
+              <td>Most games lost to injury for <em>Starters</em></td>
+            </tr>
+            <tr>
+              <td><strong>Bad Luck</strong></td>
+              <td>$20</td>
+              <td>Most Points Against (Regular Season)</td>
+            </tr>
+            <tr>
+              <td><strong>Almost Famous</strong></td>
+              <td>$20</td>
+              <td>Highest scoring team to <em>miss</em> the playoffs</td>
+            </tr>
+            <tr>
+              <td><strong>Draft Master</strong></td>
+              <td>$10</td>
+              <td>
+                Most total bench points (The "I benched the wrong guy" award)
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
 
-        <section id="order">
-            <h2>VI. Draft Order & Tiebreakers</h2>
-            <div class="card">
-                <h3>Rookie Draft Order</h3>
-                <ul>
-                    <li><strong>Non-Playoff Teams (1-4):</strong> Lowest <strong>Max Potential Points (Max PF)</strong>.</li>
-                    <li><strong>Playoff Teams (5-10):</strong> Final playoff standings.</li>
-                </ul>
-                <h3>Tiebreakers</h3>
-                <p>Seeding ties are broken by <strong>Total Points For</strong>. This rewards managers for active management and superior start/sit decisions throughout the season.</p>
-            </div>
-        </section>
+      <section id="sec2">
+        <div class="card">
+          <h2>II. Roster & Scoring</h2>
 
-        <section id="trades">
-            <h2>VII. Trades & Transfers</h2>
-            <div class="card">
-                <ul>
-                    <li><strong>Veto Policy:</strong> Commissioner only. Reserved for <strong>proven collusion</strong>.</li>
-                    <li><strong>Trade Deadline:</strong> Week 13.</li>
-                    <li><strong>Roster Dumping:</strong> Illegal. Asset liquidation must be done via trade, not drops.</li>
-                </ul>
-            </div>
-        </section>
+          <h3>2.1 Roster Composition</h3>
+          <p>
+            This is a deep-bench format designed to reward long-term talent
+            evaluation and active roster management.
+          </p>
+          <table>
+            <tr>
+              <th>Position</th>
+              <th>Quantity</th>
+              <th>Notes</th>
+            </tr>
+            <tr>
+              <td>Quarterback (QB)</td>
+              <td>1</td>
+              <td>Standard Starter</td>
+            </tr>
+            <tr>
+              <td>Running Back (RB)</td>
+              <td>2</td>
+              <td>Standard Starter</td>
+            </tr>
+            <tr>
+              <td>Wide Receiver (WR)</td>
+              <td>2</td>
+              <td>Standard Starter</td>
+            </tr>
+            <tr>
+              <td>Tight End (TE)</td>
+              <td>1</td>
+              <td>Standard Starter</td>
+            </tr>
+            <tr>
+              <td>FLEX (W/R/T)</td>
+              <td>3</td>
+              <td>Flexibility for RB/WR/TE</td>
+            </tr>
+            <tr>
+              <td>Superflex (Q/W/R/T)</td>
+              <td>1</td>
+              <td>The "Golden Slot"</td>
+            </tr>
+            <tr>
+              <td><strong>Total Starters</strong></td>
+              <td><strong>10</strong></td>
+              <td>---</td>
+            </tr>
+            <tr>
+              <td>Bench</td>
+              <td>16</td>
+              <td>Active roster depth</td>
+            </tr>
+          </table>
 
-        <section id="waivers">
-            <h2>VIII. Waivers & Free Agency</h2>
-            <div class="card">
-                <ul>
-                    <li><strong>Method:</strong> FAAB ($1,000 budget).</li>
-                    <li><strong>Processing:</strong> Wednesday 3:00 AM EST.</li>
-                    <li><strong>Sunday Drops:</strong> Bench players may be dropped after their game starts; they lock for 24 hours.</li>
-                </ul>
-            </div>
-        </section>
+          <h3>2.2 Specialty Slots</h3>
+          <ul>
+            <li>
+              <strong>Injured Reserve (IR):</strong> 2 Slots. Eligibility is
+              strictly limited to players with the
+              <strong>"IR"</strong> designation. (Players designated as Out,
+              Doubtful, or PUP are not eligible).
+            </li>
+            <li>
+              <strong>Taxi Squad:</strong> 4 Slots.
+              <ul>
+                <li>
+                  <strong>Eligibility:</strong> Only
+                  <strong>Rookies</strong> can be added to the Taxi Squad.
+                </li>
+                <li>
+                  <strong>Duration:</strong> Once on the squad, a player may
+                  remain there for an additional year (their sophomore season).
+                </li>
+                <li>
+                  <strong>Deadline:</strong> Players must be placed on Taxi
+                  <em>before</em> the first game of the regular season. Once the
+                  season begins, the squad is locked.
+                </li>
+              </ul>
+            </li>
+          </ul>
 
-        <footer>
-            <p>&copy; 2026 Dynasty League. Managed via Sleeper & LeagueSafe.</p>
-        </footer>
+          <h3>2.3 Detailed Scoring Logic</h3>
+          <p>
+            Our scoring model balances high-volume playmakers with efficient
+            chain-movers.
+          </p>
+
+          <table style="font-size: 0.9rem">
+            <tr>
+              <th>Category</th>
+              <th>Points</th>
+              <th>Category</th>
+              <th>Points</th>
+            </tr>
+            <tr>
+              <td><strong>Passing TD</strong></td>
+              <td><strong>+5.0</strong></td>
+              <td>Rushing/Rec TD</td>
+              <td>+6.0</td>
+            </tr>
+            <tr>
+              <td><strong>Interception</strong></td>
+              <td><strong>-3.0</strong></td>
+              <td>Reception (RB/WR)</td>
+              <td>+0.5</td>
+            </tr>
+            <tr>
+              <td><strong>Pick 6 (Additional)</strong></td>
+              <td><strong>-1.0</strong></td>
+              <td><strong>Reception (TE)</strong></td>
+              <td><strong>+1.0</strong></td>
+            </tr>
+            <tr>
+              <td>Passing Yard</td>
+              <td>+0.04 (1/25)</td>
+              <td><strong>First Down</strong></td>
+              <td><strong>+0.5</strong></td>
+            </tr>
+            <tr>
+              <td>Rushing/Rec Yard</td>
+              <td>+0.1 (1/10)</td>
+              <td><strong>2-Pt Conversion</strong></td>
+              <td><strong>+2.0</strong></td>
+            </tr>
+            <tr>
+              <td>Fumble Lost</td>
+              <td>-2.0</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+
+          <h3>2.4 Taxi Squad Poaching</h3>
+          <p>
+            To keep the league active, managers may "poach" players from an
+            opponent's Taxi Squad.
+          </p>
+          <ul>
+            <li>
+              <strong>The Cost:</strong> To steal a player, you must pay a draft
+              pick from the upcoming rookie draft that is
+              <strong>one round higher</strong> than where that player was
+              originally drafted.
+            </li>
+            <li>
+              <strong>The "1st Round" Exception:</strong> To poach a player
+              originally drafted in the 1st Round, the cost is
+              <strong>two 1st Round picks</strong>.
+            </li>
+            <li>
+              <strong>The Right of First Refusal:</strong> Once a poach is
+              initiated, the original owner has <strong>24 hours</strong> to
+              either:
+              <ol>
+                <li>Accept the draft pick(s) and move the player.</li>
+                <li>
+                  Promote the player to their
+                  <strong>active roster</strong> (which may require cutting
+                  another player).
+                </li>
+              </ol>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec3">
+        <div class="card">
+          <h2>III. The Campaign: Weekly Logistics</h2>
+
+          <h3>3.1 The Extra Game: League Median</h3>
+          <p>
+            To reduce the impact of "schedule luck," every team plays
+            <strong>two games per week</strong> during the regular season:
+          </p>
+          <ul>
+            <li>
+              <strong>Head-to-Head:</strong> Your standard matchup against a
+              weekly opponent.
+            </li>
+            <li>
+              <strong>The League Median:</strong> A second game played against
+              the league's average score for that week. If you finish in the top
+              5 scores of the week, you get a win. If you finish in the bottom
+              5, you get a loss.
+            </li>
+          </ul>
+
+          <h3>3.2 Waivers & FAAB Pools</h3>
+          <p>
+            We use two distinct FAAB budgets to ensure talent is contested
+            year-round.
+          </p>
+          <ul>
+            <li>
+              <strong>The Offseason Pool:</strong> Every manager receives
+              <strong>$250</strong> immediately following the Rookie Draft. This
+              is for summer moves and training camp flyers.
+              <strong>Leftover funds do not roll over.</strong>
+            </li>
+            <li>
+              <strong>The Season Pool:</strong> On the Wednesday before Week 1,
+              all budgets reset to <strong>$250</strong> for the duration of the
+              regular season.
+            </li>
+            <li>
+              <strong>The Wednesday Cycle:</strong> The primary waiver wire
+              clears every Wednesday morning.
+            </li>
+            <li>
+              <strong>Roster Status:</strong> If your roster exceeds the limit
+              (e.g., after a draft), it becomes "Invalid." You cannot set a
+              lineup or make further moves until you cut down to the legal
+              limit.
+            </li>
+          </ul>
+
+          <h3>3.3 Trades & The Trade Deadline</h3>
+          <p>
+            Trading is the lifeblood of Dynasty. We encourage active
+            negotiation.
+          </p>
+          <ul>
+            <li>
+              <strong>No Trade Vetos:</strong> The Commissioner will not veto
+              trades based on "value." Only clear, proven
+              <strong>collusion</strong> (under-the-table deals) will result in
+              a trade reversal and potential ban.
+            </li>
+            <li>
+              <strong>The Pick Tax:</strong> As noted in Section I, any trade
+              involving a future pick requires dues to be paid through that
+              pick's year before the trade is finalized.
+            </li>
+            <li>
+              <strong>Trade Deadline:</strong> The deadline to trade for the
+              current season is the kickoff of <strong>Week 13</strong>. After
+              this, trades are disabled until the conclusion of the Fantasy
+              Championship.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec4">
+        <div class="card">
+          <h2>IV. The Tournament: Playoffs & Consolation</h2>
+
+          <h3>4.1 The Road to the Ship</h3>
+          <p>
+            The postseason begins in <strong>Week 15</strong>. Six teams qualify
+            based on their total regular season record (H2H + League Median).
+          </p>
+          <ul>
+            <li>
+              <strong>The Bye:</strong> The #1 and #2 seeds receive a
+              first-round bye.
+            </li>
+            <li>
+              <strong>Schedule:</strong>
+              <ul>
+                <li>Week 15: Quarterfinals</li>
+                <li>Week 16: Semifinals</li>
+                <li>Week 17: Fantasy Championship</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Dynamic Re-seeding:</strong> This league does not use a
+              fixed bracket. In every round, the highest remaining seed will
+              always play the lowest remaining seed.
+            </li>
+          </ul>
+
+          <h3>4.2 Standings Tiebreakers</h3>
+          <p>
+            In the event that two or more teams finish the regular season with
+            the same win/loss record, the following tiebreakers will be applied
+            in order to determine seeding:
+          </p>
+          <ol>
+            <li>
+              <strong>Total Points For (PF):</strong> The primary tiebreaker.
+              The team with the highest total points scored during the regular
+              season (Weeks 1-14).
+            </li>
+            <li>
+              <strong>Total Points Against (PA):</strong> The team that faced
+              the higher "Points Against" (the harder schedule) wins the tie.
+            </li>
+            <li>
+              <strong>Head-to-Head Record:</strong> Best win percentage in
+              matchups between the tied teams.
+            </li>
+            <li>
+              <strong>The Coin Flip:</strong> If all else fails, a digital coin
+              flip or random generator will determine the seed.
+            </li>
+          </ol>
+
+          <h3>4.3 The Toilet Bowl (Consolation Bracket)</h3>
+          <p>
+            The bottom four teams compete in a consolation bracket strictly for
+            pride and "the bit."
+          </p>
+          <ul>
+            <li>
+              <strong>The Prize:</strong> The winner of the Toilet Bowl earns
+              the right to dictate a <strong>League-Wide Email Blast</strong>.
+              The winner writes it, and the Commissioner sends it out to the
+              whole league.
+            </li>
+            <li>
+              <strong>No Strategic Advantage:</strong> This award provides no
+              draft picks, no cash, and no competitive edge. It is a platform
+              for pure, unadulterated trash talk.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sec5">
+        <div class="card">
+          <h2>V. The Drafts: Startup & Rookies</h2>
+
+          <h3>5.1 The Startup Draft (The Genesis)</h3>
+          <p>
+            The initial league roster will be filled via a "Slow Draft" on
+            Sleeper using <strong>Kentucky Derby Style (KDS)</strong> slot
+            selection and <strong>Third-Round Reversal (3RR)</strong>.
+          </p>
+
+          <ul>
+            <li>
+              <strong>The KDS Process:</strong>
+              <ol>
+                <li>A random generator determines a selection order (1-10).</li>
+                <li>
+                  In that order, each manager <em>chooses</em> their desired
+                  draft slot.
+                </li>
+              </ol>
+            </li>
+            <li>
+              <strong>What is 3RR?</strong> In a standard snake, the 1.01 picks
+              first in every odd round. In 3RR, the draft "flips" at Round 3.
+              The person at the end of the draft (1.10) gets the 3.01, and the
+              person who started at 1.01 now picks last in the 3rd round.
+            </li>
+          </ul>
+
+          <h4>3RR Draft Order Example (10 Teams)</h4>
+          <table>
+            <tr>
+              <th>Round</th>
+              <th>Direction</th>
+              <th>First Pick</th>
+              <th>Last Pick</th>
+            </tr>
+            <tr>
+              <td>Round 1</td>
+              <td>1 &rarr; 10</td>
+              <td>Manager 1 (1.01)</td>
+              <td>Manager 10 (1.10)</td>
+            </tr>
+            <tr>
+              <td>Round 2</td>
+              <td>10 &rarr; 1</td>
+              <td>Manager 10 (2.01)</td>
+              <td>Manager 1 (2.10)</td>
+            </tr>
+            <tr style="background: rgba(253, 185, 39, 0.2)">
+              <td><strong>Round 3</strong></td>
+              <td><strong>10 &rarr; 1</strong></td>
+              <td><strong>Manager 10 (3.01)</strong></td>
+              <td><strong>Manager 1 (3.10)</strong></td>
+            </tr>
+            <tr>
+              <td>Round 4</td>
+              <td>1 &rarr; 10</td>
+              <td>Manager 1 (4.01)</td>
+              <td>Manager 10 (4.10)</td>
+            </tr>
+            <tr>
+              <td>Round 5</td>
+              <td>10 &rarr; 1</td>
+              <td>Manager 10 (5.01)</td>
+              <td>Manager 1 (5.10)</td>
+            </tr>
+          </table>
+
+          <h3>5.2 Annual Rookie Drafts</h3>
+          <p>
+            Following the NFL Draft, we hold a 4-round linear Rookie Draft
+            (1-10, 1-10, etc.).
+          </p>
+          <ul>
+            <li>
+              <strong>Non-Playoff Teams (Picks 1.01 – 1.04):</strong> Ranked by
+              <strong>Lowest Max Potential Points (Max PF)</strong>. This
+              ensures the weakest roster (not just the unluckiest) gets the top
+              pick.
+            </li>
+            <li>
+              <strong>Playoff Teams (Picks 1.05 – 1.10):</strong> Ranked by the
+              inverse of the final playoff standings. The Champion always picks
+              1.10.
+            </li>
+          </ul>
+
+          <div class="example-box">
+            <strong>The Strategy:</strong> 3RR is specifically used in Superflex
+            because the top 3-4 QBs are significantly more valuable than anyone
+            else. 3RR forces the person with the 1.01 to wait significantly
+            longer for their 3rd player, balancing the power across the league.
+          </div>
+        </div>
+      </section>
+
+      <section id="sec6">
+        <div class="card">
+          <h2>VI. League Integrity & Governance</h2>
+
+          <h3>6.1 Anti-Tanking & Abandonment</h3>
+          <p>
+            While we allow "rebuilding" (trading veterans for picks), we do not
+            allow "lineup tanking." Managers must field a full, active roster
+            weekly.
+          </p>
+          <ul>
+            <li>
+              <strong>The "Best Ball" Contingency:</strong> If a manager is
+              removed or abandons their team mid-season, the Commissioner will
+              take over the roster. To maintain league integrity, the lineup
+              will be set using <strong>Best Ball methods</strong> (highest
+              projected scorers) until a new owner is found. This ensures the
+              team remains competitive and does not hand out "free wins" to
+              opponents.
+            </li>
+            <li>
+              <strong>Penalties:</strong> Repeatedly starting players who are on
+              Bye, IR, or Out will result in formal warnings, followed by the
+              potential forfeiture of future draft picks.
+            </li>
+          </ul>
+
+          <h3>6.2 Governance & Evolution</h3>
+          <p>
+            This is a living document. We prioritize a functional league over
+            rigid adherence to a bad rule.
+          </p>
+          <ul>
+            <li>
+              <strong>Rule Adjustments:</strong> While the offseason is the
+              preferred time for changes, rule adjustments can happen
+              <strong>at any time</strong> if a rule is found to be detrimental
+              to the league.
+            </li>
+            <li>
+              <strong>The Retroactive Ban:</strong> No rule change will ever be
+              applied retroactively. Changes only affect future outcomes and
+              cannot be used to overturn past scores, trades, or standings.
+            </li>
+            <li>
+              <strong>Voting:</strong> Major changes require a
+              <strong>Supermajority (7/10)</strong> to pass.
+            </li>
+          </ul>
+
+          <h3>6.3 Management & Co-Ownership</h3>
+          <ul>
+            <li>
+              <strong>The Primary Owner:</strong> Every team has one Primary
+              Owner who is solely responsible for dues, voting, and
+              communication.
+            </li>
+            <li>
+              <strong>Handling Co-Owners:</strong> The addition or removal of
+              co-owners is handled entirely by the
+              <strong>Primary Owner</strong> within the Sleeper app. The
+              Commissioner will not assign, unassign, or mediate disputes
+              between co-owners.
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
-
-</body>
+  </body>
 </html>
